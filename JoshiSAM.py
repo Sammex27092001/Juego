@@ -1,13 +1,16 @@
 import pygame
 import sys
 import random
-import turtle
+from pygame.locals import *
+pygame.init()
+ 
 #COLORES
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
+ORANGE=(255,165,5)
 #PANTALLA
 ANCHO=1000
 ALTO=800
@@ -26,8 +29,14 @@ ENEMIGO_POS3=[random.randint(0,ANCHO-ENEMIGO_TAM3),30]
 
 #ventana
 ventana= pygame.display.set_mode((ANCHO,ALTO))
+pygame.display.set_caption("JOSHISAM")
 game_over=False
 clock=pygame.time.Clock()
+
+#Escribir 
+fuente = pygame.font.Font(None, 50)
+texto1 = fuente.render("Bienvenidos al JOSHISAM", 0, (ORANGE))
+
 
 #Funciones
 def detectar_colision1(JUGADOR_POS,ENEMIGO_POS,):
@@ -46,8 +55,8 @@ def detectar_colision2(JUGADOR_POS,ENEMIGO_POS2,):
     ex=ENEMIGO_POS2[0]
     ey=ENEMIGO_POS2[1]
     
-    if (ex>jx and ex<(jx+JUGADOR_TAM)) or (jx>=ex and jx<(ex+ENEMIGO_TAM2)):
-       if (ey>jy and ey<(jy+JUGADOR_TAM)) or (jy>=ex and jy<(ey+ENEMIGO_TAM2)):
+    if (ex>jx and ex<(jx+JUGADOR_TAM)) or (jx>=ex and jx<(ex+ENEMIGO_TAM)):
+       if (ey>jy and ey<(jy+JUGADOR_TAM)) or (jy>=ex and jy<(ey+ENEMIGO_TAM)):
                 return True
     return False
 def detectar_colision3(JUGADOR_POS,ENEMIGO_POS3,):
@@ -127,11 +136,11 @@ while not game_over:
     #DIBUJAR ENEMIGO3
     pygame.draw.circle(ventana, BLUE, (ENEMIGO_POS3[0], ENEMIGO_POS3[1]), ENEMIGO_TAM3, ENEMIGO_TAM3)
     
-
+   
     #Dibujar jugador
     pygame.draw.circle(ventana, GREEN, (JUGADOR_POS[0], JUGADOR_POS[1]), JUGADOR_TAM, JUGADOR_TAM)
 
-
-
-    clock.tick(35)#Velocidad
+    
+    ventana.blit(texto1, (300,50))
+    clock.tick(50)#Velocidad
     pygame.display.update()
