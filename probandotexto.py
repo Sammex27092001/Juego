@@ -1,21 +1,32 @@
 import pygame
-from pygame.locals import *
- 
+
 pygame.init()
- 
-pantalla = pygame.display.set_mode((450,300),0,32)
-pygame.display.set_caption("Modulo de fuentes")
- 
-reloj = pygame.time.Clock()
- 
-fuente = pygame.font.Font(None, 30)
-texto1 = fuente.render("Texto de pruebas", 0, (255, 255, 255))
- 
- 
-while True:
+
+FONT = pygame.font.SysFont("Sans", 20)
+TEXT_COLOR = (0, 0, 0)
+BG_COLOR = (255, 255, 255)
+
+loop = True
+start_time = None
+screen = pygame.display.set_mode((800, 600))
+clock = pygame.time.Clock()
+while loop:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            exit()
-    reloj.tick(20)
-    pantalla.blit(texto1, (100,100))
-    pygame.display.update()
+         pygame.quit()
+quit()
+if event.type == pygame.KEYDOWN:
+    if event.key == pygame.K_RETURN:
+        start_time = pygame.time.get_ticks()
+
+screen.fill(BG_COLOR)
+
+if start_time:
+    time_since_enter = pygame.time.get_ticks() - start_time
+    message = "Milliseconds since enter: " + str(time_since_enter)
+    screen.blit(FONT.render(message, True, TEXT_COLOR), (20, 20))
+
+pygame.display.flip()
+clock.tick(60)
+
+pygame.quit()
