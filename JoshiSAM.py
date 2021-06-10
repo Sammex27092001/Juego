@@ -210,5 +210,5 @@ while not game_over:
     ventana.blit(contador, (120,20))
     ventana.blit(texto1, (300,50))
     ventana.blit(texto2, (5,20))
-    clock.tick(54)#Velocidad
+    clock.tick(50)#Velocidad
     pygame.display.update()
